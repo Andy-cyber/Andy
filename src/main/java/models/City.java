@@ -1,0 +1,6 @@
+package models;
+
+    public enum City {
+        KIEV, LVIV, KHARKIV, LONDON, BERLIN, WARSAW, LISSABON, PARIS, CHISINAU, MINSK, MADRID, TOKIO, PEKIN,
+        WASHINGTON, OTTAWA, CHICAGO
+    }

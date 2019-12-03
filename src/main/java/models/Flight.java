@@ -1,30 +1,43 @@
 package models;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import validators.ValidatorServiceImpl;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.concurrent.atomic.AtomicLong;
 
+import serialisation.dataTimeSerializer.JSON.JsonLocalDateDeserializer;
+import serialisation.dataTimeSerializer.JSON.JsonLocalDateSerializer;
+import serialisation.dataTimeSerializer.JSON.JsonLocalTimeDeserializer;
+import serialisation.dataTimeSerializer.JSON.JsonLocalTimeSerializer;
+
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Flight {
-
+    @XmlEnum
+    public enum City {
+        KIEV, LVIV, KHARKIV, LONDON, BERLIN, WARSAW, LISSABON, PARIS, CHISINAU, MINSK, MADRID, TOKIO, PEKIN,
+        WASHINGTON, OTTAWA, CHICAGO
+    }
     private  int id;
-
     private String companyName;
-
+    @JsonSerialize(using = JsonLocalDateSerializer.class)
+    @JsonDeserialize(using = JsonLocalDateDeserializer.class)
     private LocalDate dateOfFlight;
-
     private int timeInFlight;
-
+    @JsonSerialize(using = JsonLocalTimeSerializer.class)
+    @JsonDeserialize(using = JsonLocalTimeDeserializer.class)
     private LocalTime timeTakeOff;
-
     private double price;
-
     private City from;
-
     private City to;
 
-    public Flight(FlightBuilder flightBuilder){super();}
-
-    public Flight(Flight builder) {
+    public Flight(){super();}
+    public Flight(FlightBuilder builder) {
         this.id = builder.getId();
         this.companyName = builder.getCompanyName();
         this.dateOfFlight = builder.getDateOfFlight();
@@ -36,75 +49,54 @@ public class Flight {
     }
 
     public void setId(int id){this.id = id;}
-
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
-
     public void setDateOfFlight(LocalDate dateOfFlight) {
         this.dateOfFlight = dateOfFlight;
     }
-
     public void setTimeInFlight(int timeInFlight) {
         this.timeInFlight = timeInFlight;
     }
-
     public void setTimeTakeOff(LocalTime timeTakeOff) {
         this.timeTakeOff = timeTakeOff;
     }
-
     public void setPrice(double price) {
         this.price= price;
     }
-
     public void setFrom(City from) {
         this.from = from;
     }
-
     public void setTo(City to) { this.to = to; }
 
     public String getCompanyName() {
         return companyName;
     }
-
     public LocalDate getDateOfFlight() {
         return dateOfFlight;
     }
-
     public int getTimeInFlight() {
         return timeInFlight;
     }
-
     public LocalTime getTimeTakeOff() {
         return timeTakeOff;
     }
-
     public double getPrice() {
         return price;
     }
-
     public City getFrom() {
         return from;
     }
-
     public City getTo() {
         return to;
     }
-
     public int getId() {
         return id;
     }
 
-    public enum City {WASHINGTON, KIEV, KHARKIV, BERLIN;
-        public static final City MADRID = null;
-        public static final City MINSK = null;
-        public static final City TOKIO = null ;
-        public static final City LONDON = null;
-        public static final City OTTAWA =null ;
-        public static final City LISSABON =null ;
-    }
 
-    public static class FlightBuilder<ValidatorServiceImpl> {
+
+    public static class FlightBuilder {
 
         private static AtomicLong idCounter = new AtomicLong(1);
 
@@ -117,7 +109,7 @@ public class Flight {
         public Flight.City from;
         public Flight.City to;
 
-        private ValidatorServiceImpl validator;
+        private static ValidatorServiceImpl validator;
 
         public FlightBuilder() { validator = new ValidatorServiceImpl(); }
 
@@ -224,7 +216,6 @@ public class Flight {
         if (from != flight.from) return false;
         return to == flight.to;
     }
-
     @Override
     public int hashCode() {
         int result;

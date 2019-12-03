@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface FlightProvider {
 
-    void addFlight(Flight flight);
+    void addFlight(int idAirport, Flight flight);
     void editFlight(Flight flight);
     void deleteFlight(int idFlight);
 

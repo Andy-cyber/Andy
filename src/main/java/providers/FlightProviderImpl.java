@@ -45,6 +45,11 @@ public class FlightProviderImpl implements FlightProvider {
     }
 
     @Override
+    public void addFlight(int idAirport, Flight flight) {
+
+    }
+
+    @Override
     public void editFlight(Flight flight) {
 
         if (!(this.checkId(flight.getId()))) {

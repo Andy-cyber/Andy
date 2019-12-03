@@ -8,12 +8,7 @@ import java.util.ArrayList;
 public interface FlightService {
 
 
-    static void addFlight(Flight flight) {
-
-    }
-
     void addFlight(Flight flight);
-
     void editFlight(Flight flight);
     void deleteFlight(int idFlight);
 

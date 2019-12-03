@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class FlightServiceImpl implements FlightService {
 
     private FlightProvider flightProvider;
+    private int idAirport;
 
     public FlightServiceImpl(FlightProvider flightProvider){
         this.flightProvider = flightProvider;
@@ -17,7 +18,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public void addFlight(Flight flight) {
-        flightProvider.addFlight(flight);
+        flightProvider.addFlight(idAirport, flight);
     }
 
     @Override

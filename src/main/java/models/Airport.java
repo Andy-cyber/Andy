@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Airport {
 
-
     public int id;
     public Object name;
     public Object flights;

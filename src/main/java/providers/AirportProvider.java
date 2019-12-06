@@ -9,6 +9,8 @@ public interface AirportProvider {
 
     ArrayList<Airport> getAirportList();
 
+    Airport getAirport(int idAirport);
+
     void addAirport(Airport airport);
     void editAirport(Airport airport);
     void deleteAirport(int idAirport);

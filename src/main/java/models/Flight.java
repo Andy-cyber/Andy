@@ -23,6 +23,7 @@ public class Flight {
         KIEV, LVIV, KHARKIV, LONDON, BERLIN, WARSAW, LISSABON, PARIS, CHISINAU, MINSK, MADRID, TOKIO, PEKIN,
         WASHINGTON, OTTAWA, CHICAGO
     }
+
     private  int id;
     private String companyName;
     @JsonSerialize(using = JsonLocalDateSerializer.class)

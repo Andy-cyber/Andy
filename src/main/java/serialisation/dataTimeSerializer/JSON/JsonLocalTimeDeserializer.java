@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.time.LocalTime;
 
 public class JsonLocalTimeDeserializer extends JsonDeserializer<LocalTime> {

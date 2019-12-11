@@ -1,5 +1,6 @@
 package main;
 
+import dataBase.JDBC;
 import models.Airport;
 import models.AirportBuilder;
 import models.Flight;
@@ -8,6 +9,7 @@ import providers.AirportProviderImpl;
 import services.AirportService;
 import services.AirportServiceImpl;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -109,5 +111,23 @@ public class Main {
             System.out.println(e);
         }
         System.out.println();
+        JDBC jdbc = null;
+        try {
+            jdbc = new JDBC();
+            jdbc.clearDataBase();
+            jdbc.addAirport(myAirport);
+            for (int i=0;i<myAirport.getFlights().size();i++){
+                jdbc.addFlight(myAirport.getFlights().get(i),myAirport.getId());
+            }
+            jdbc.addAirport(secondAirport);
+            for (int i=0;i<secondAirport.getFlights().size();i++){
+                jdbc.addFlight(secondAirport.getFlights().get(i),secondAirport.getId());
+            }
+            System.out.println(jdbc.getAirportByFlight(2));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

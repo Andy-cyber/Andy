@@ -1,5 +1,8 @@
 package serialisation;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -20,13 +23,11 @@ public class XmlSerializeImpl<T> implements Serialisation<T> {
 
     @Override
     public void toFile(ArrayList<T> object, File file) {
-        FileWriter writer = null;
         try {
-            writer = new FileWriter(file);
-            int strObj = 0;
-            writer.write(strObj);
-            writer.close();
-        } catch (IOException e) {
+            JAXBContext contextObj = JAXBContext.newInstance(object.getClass());
+            Marshaller marshallerObj = contextObj.createMarshaller();
+            marshallerObj.marshal(object, new FileOutputStream(file.getName()));
+        } catch (IOException | JAXBException e) {
             e.printStackTrace();
         }
     }

@@ -2,14 +2,25 @@ package models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import javax.xml.bind.annotation.XmlRootElement;
 
-
+@XmlRootElement
 public class Airport {
 
-    public int id;
-    public Object name;
-    public Object flights;
+    @XStreamAlias("id")
+    protected int id;
+    @XStreamAlias("name")
+    protected String name;
+    @XStreamAlias("flights")
+    protected List<Flight> flights;
+
+
+//public class Airport {
+
+  //  public int id;
+    //public Object name;
+    //public Object flights;
 
     public Airport() {super();}
 

@@ -1,9 +1,7 @@
-
 import models.Airport;
 import models.AirportBuilder;
 import models.Flight;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import serialisation.JsonSerializeImpl;
 import serialisation.Serialisation;
 import serialisation.XmlSerializeImpl;
@@ -20,8 +18,8 @@ import static org.testng.Assert.assertTrue;
 public class TestSerialisation {
     File jsonFile = new File("jsonFile.json");
     File xmlFile = new File("xmlFile.xml");
-    ArrayList<Airport> airports = null;
-    ArrayList<Flight> flights = null;
+    ArrayList<Airport> airports;// =new ArrayList<>();;
+    ArrayList<Flight> flights;//=new ArrayList<>();
 
     private boolean checkFlight(List<Flight> flightList, List<Flight> expected) {
         for (int i=0; i<flightList.size();i++){
@@ -46,7 +44,7 @@ public class TestSerialisation {
     @BeforeTest
     public void initialize(){
         airports = new ArrayList<>();
-        flights = new ArrayList<Flight>();
+        flights = new ArrayList<>();
         Airport airport = new AirportBuilder().setId().setName("MAO").build();
         try {
             Flight flight = new Flight.FlightBuilder()
@@ -66,32 +64,46 @@ public class TestSerialisation {
             System.out.println(e);
         }
     }
-    @org.testng.annotations.Test(dataProvider = "jsonSerialisation")
-    public void jsonTest(ArrayList<Airport> arrayList, ArrayList<Airport> expected){
-        assertTrue(this.checkAirport(arrayList,expected));
+    @org.testng.annotations.Test//(dataProvider = "jsonSerialisation")
+    //public void jsonTest(ArrayList<Airport> arrayList, ArrayList<Airport> expected){
+    public void jsonTest() throws Exception {
+        Serialisation<Airport> json = new JsonSerializeImpl<Airport>(Airport.class);
+//        json.toFile(airports,jsonFile);
+//        ArrayList<Airport> object = null;
+//        try {
+        ArrayList<Airport> actual  = json.fromFile(jsonFile);
+        System.out.println(actual);
+        assertTrue(this.checkAirport(actual,airports));
     }
 
-    @DataProvider
-    public Object[][] jsonSerialisation(){
-        Serialisation<Airport> json = new JsonSerializeImpl<Airport>(Airport.class);
-        json.toFile(airports,jsonFile);
-        ArrayList<Airport> object = null;
-        try {
-            object = json.fromFile(jsonFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new Object[][]{{object,airports}};
-    }
+//    @DataProvider
+//    public Object[][] jsonSerialisation(){
+//        Serialisation<Airport> json = new JsonSerializeImpl<Airport>(Airport.class);
+//        json.toFile(airports,jsonFile);
+//        ArrayList<Airport> object = null;
+//        try {
+//            object = json.fromFile(jsonFile);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return new Object[][]{{object,airports}};
+//    }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    @org.testng.annotations.Test(dataProvider = "xmlSerialisation")
+    @org.testng.annotations.Test//(dataProvider = "xmlSerialisation")
+    public void xmlTest() throws Exception {
+        Serialisation<Airport> xml = new XmlSerializeImpl<Airport>(Airport.class);
+        xml.toFile(airports, xmlFile);
+        ArrayList<Airport> actual = xml.fromFile(xmlFile);
+        System.out.println(actual);
+        assertTrue(this.checkAirport(actual, airports));
+    }
+   /* @org.testng.annotations.Test(dataProvider = "xmlSerialisation")
     public void xmlTest(ArrayList<Airport> arrayList, ArrayList<Airport> expected){
         assertTrue(this.checkAirport(arrayList,expected));
-    }
+    }*/
 
-    @DataProvider
+  /*  @DataProvider
     public Object[][] xmlSerialisation(){
         Serialisation<Airport> xml = new XmlSerializeImpl<>(Airport.class);
         xml.toFile(airports,xmlFile);
@@ -102,7 +114,7 @@ public class TestSerialisation {
             e.printStackTrace();
         }
         return new Object[][]{{object,airports}};
-    }
+    }*/
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

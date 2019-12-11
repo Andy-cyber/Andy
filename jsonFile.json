@@ -1,7 +1,16 @@
 [ {
   "id" : 1,
   "name" : "MAO",
-  "flights" : [ {
-    "id" : 1,
-    "companyName" : "West Side",
-    "dateOfFlight"
+  "flights" : [
+    {
+      "id": 1,
+      "companyName": "West Side",
+      "dateOfFlight": "2017-02-25",
+      "timeInFlight": "2",
+      "price": "100",
+      "from": "KIEV",
+      "to": "LONDON"
+    }
+    ]
+    }
+  ]

@@ -1,5 +1,6 @@
 package dataBase;
 
+import com.mysql.fabric.jdbc.FabricMySQLDriver;
 import models.Airport;
 import models.AirportBuilder;
 import models.Flight;
@@ -14,13 +15,13 @@ import java.util.List;
 public class JDBC {
 
     private static Connection con = null;
-    private static String username = "root";
-    private static String password = "12345";
-      //  private static String URL = "jdbc:mysql://localhost:3306/airports";
-    private static String URL = "jdbc:mysql://localhost:3306/airports?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static String username = "postgres";
+    private static String password = "11";
+   private static String URL = "jdbc:postgresql://localhost:5432/postgres";
+  //  private static String URL = "jdbc:mysql://localhost:3306/airports?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     public JDBC() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+       // Class.forName("org.postgres.Driver");//com.mysql.jdbc.Driver");
         con = DriverManager.getConnection(URL, username, password);
     }
     public static Connection getCon() {

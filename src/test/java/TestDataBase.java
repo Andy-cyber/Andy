@@ -25,10 +25,13 @@ public class TestDataBase{
     Airport firstAirport = null;
     Airport secondAirport = null;
     Airport thirdAirport = null;
-    JDBC jdbc = null;
+    JDBC jdbc = new JDBC();
+
+    public TestDataBase() throws SQLException, ClassNotFoundException {
+    }
+
     @BeforeTest
     public void initJDBC() throws SQLException, ClassNotFoundException {
-        jdbc = new JDBC();
     }
     public void initialize() throws SQLException, ClassNotFoundException {
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><airport>
+    <flights><companyName>West Side</companyName>
+        <dateOfFlight/><from>KIEV</from>
+        <id>1</id>
+        <price>120.99</price>
+        <timeInFlight>120</timeInFlight>
+        <timeTakeOff/><to>LONDON</to></flights>
+        <id>1</id>
+        <name>MAO</name>
+</airport>

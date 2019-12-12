@@ -65,58 +65,21 @@ public class TestSerialisation {
         }
     }
     @org.testng.annotations.Test//(dataProvider = "jsonSerialisation")
-    //public void jsonTest(ArrayList<Airport> arrayList, ArrayList<Airport> expected){
     public void jsonTest() throws Exception {
         Serialisation<Airport> json = new JsonSerializeImpl<Airport>(Airport.class);
-//        json.toFile(airports,jsonFile);
-//        ArrayList<Airport> object = null;
-//        try {
         ArrayList<Airport> actual  = json.fromFile(jsonFile);
         System.out.println(actual);
         assertTrue(this.checkAirport(actual,airports));
     }
 
-//    @DataProvider
-//    public Object[][] jsonSerialisation(){
-//        Serialisation<Airport> json = new JsonSerializeImpl<Airport>(Airport.class);
-//        json.toFile(airports,jsonFile);
-//        ArrayList<Airport> object = null;
-//        try {
-//            object = json.fromFile(jsonFile);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return new Object[][]{{object,airports}};
-//    }
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @org.testng.annotations.Test//(dataProvider = "xmlSerialisation")
     public void xmlTest() throws Exception {
         Serialisation<Airport> xml = new XmlSerializeImpl<Airport>(Airport.class);
-        xml.toFile(airports, xmlFile);
+        xml.toFile(airports.get(0), xmlFile);
         ArrayList<Airport> actual = xml.fromFile(xmlFile);
         System.out.println(actual);
         assertTrue(this.checkAirport(actual, airports));
     }
-   /* @org.testng.annotations.Test(dataProvider = "xmlSerialisation")
-    public void xmlTest(ArrayList<Airport> arrayList, ArrayList<Airport> expected){
-        assertTrue(this.checkAirport(arrayList,expected));
-    }*/
-
-  /*  @DataProvider
-    public Object[][] xmlSerialisation(){
-        Serialisation<Airport> xml = new XmlSerializeImpl<>(Airport.class);
-        xml.toFile(airports,xmlFile);
-        ArrayList<Airport> object = null;
-        try {
-            object = xml.fromFile(xmlFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new Object[][]{{object,airports}};
-    }*/
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 }

@@ -35,6 +35,11 @@ public class JsonSerializeImpl<T> implements Serialisation<T> {
     }
 
     @Override
+    public void toFile(T object, File file) {
+
+    }
+
+    @Override
     public ArrayList<T> fromFile(File file) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         TypeFactory typeFactory = mapper.getTypeFactory();

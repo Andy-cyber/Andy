@@ -33,6 +33,17 @@ public class XmlSerializeImpl<T> implements Serialisation<T> {
     }
 
     @Override
+    public void toFile(T object, File file) {
+        try {
+            JAXBContext contextObj = JAXBContext.newInstance(object.getClass());
+            Marshaller marshallerObj = contextObj.createMarshaller();
+            marshallerObj.marshal(object, new FileOutputStream(file.getName()));
+        } catch (IOException | JAXBException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public ArrayList<T> fromFile(File file) {
         FileReader fileReader = null;
         try {
